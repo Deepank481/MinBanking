@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Minimalist Banking App</title>
+  </head>
+  <body>
+    <header>
+      <h1>Minimalist Bank</h1>
+    </header>
+
+    <div class="container">
+      <div class="sidebar">
+        <h2>Account Summary</h2>
+        <!-- Add account summary details here -->
+
+        <h2>Money Transfer</h2>
+        <form id="moneyTransferForm">
+          <label for="recipientAccount">Recipient's Account:</label>
+          <input
+            type="text"
+            id="recipientAccount"
+            name="recipientAccount"
+            required
+          />
+
+          <label for="amount">Amount:</label>
+          <input type="number" id="amount" name="amount" required />
+
+          <label for="note">Note:</label>
+          <textarea id="note" name="note"></textarea>
+
+          <button type="submit">Transfer Money</button>
+        </form>
+
+        <h2>Loan Request</h2>
+        <form id="loanRequestForm">
+          <label for="loanAmount">Loan Amount:</label>
+          <input type="number" id="loanAmount" name="loanAmount" required />
+
+          <label for="repaymentPeriod">Repayment Period (months):</label>
+          <input
+            type="number"
+            id="repaymentPeriod"
+            name="repaymentPeriod"
+            required
+          />
+
+          <label for="loanPurpose">Loan Purpose:</label>
+          <textarea id="loanPurpose" name="loanPurpose"></textarea>
+
+          <button type="submit">Request Loan</button>
+        </form>
+
+        <h2>Close Account</h2>
+        <form id="closeAccountForm">
+          <label for="closureReason">Reason for Closure:</label>
+          <select id="closureReason" name="closureReason" required>
+            <option value="low_activity">Low Account Activity</option>
+            <option value="better_opportunity">Found Better Opportunity</option>
+            <option value="customer_service">
+              Unsatisfactory Customer Service
+            </option>
+            <!-- Add more closure reasons as needed -->
+          </select>
+
+          <label for="closureComments">Additional Comments:</label>
+          <textarea id="closureComments" name="closureComments"></textarea>
+
+          <button type="submit">Close Account</button>
+        </form>
+
+        <h2>Change User</h2>
+        <form id="changeUserForm">
+          <label for="newUserName">New User Name:</label>
+          <input type="text" id="newUserName" name="newUserName" required />
+
+          <label for="newUserAccount">New User Account:</label>
+          <input
+            type="text"
+            id="newUserAccount"
+            name="newUserAccount"
+            required
+          />
+
+          <button type="submit">Change User</button>
+        </form>
+      </div>
+
+      <div class="main-content">
+        <h2>Recent Transactions</h2>
+        <button id="sortButton" onclick="sortTransactions()">
+          Sort Transactions
+        </button>
+
+        <label for="transactionsPerPage">Transactions per Page:</label>
+        <select id="transactionsPerPage" onchange="changeTransactionsPerPage()">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+
+        <ul id="transactionList" class="transaction-list">
+          <li class="transaction-item">Transaction 1 - $100.00</li>
+          <li class="transaction-item">Transaction 2 - $50.00</li>
+          <li class="transaction-item">Transaction 3 - $75.00</li>
+          <!-- Add more transactions as needed -->
+        </ul>
+
+        <div id="pagination">
+          <button onclick="changePage(-1)">Previous</button>
+          <span id="currentPage">1</span>
+          <button onclick="changePage(1)">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        &copy; 2024 Minimalist Bank. All rights reserved. |
+        <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
+      </p>
+    </footer>
+
+    <script>
+      var transactionsPerPage = 10;
+      var currentPage = 1;
+
+      function sortTransactions() {
+        // Sorting logic here
+      }
+
+      function displayTransactions() {
+        var transactionList = document.getElementById("transactionList");
+        var transactions = transactionList.children;
+
+        for (var i = 0; i < transactions.length; i++) {
+          transactions[i].style.display = "none";
+        }
+
+        var startIndex = (currentPage - 1) * transactionsPerPage;
+        var endIndex = startIndex + transactionsPerPage;
+
+        for (var i = startIndex; i < endIndex; i++) {
+          if (transactions[i]) {
+            transactions[i].style.display = "block";
+          }
+        }
+
+        document.getElementById("currentPage").innerText = currentPage;
+      }
+
+      function changePage(offset) {
+        currentPage += offset;
+        if (currentPage < 1) {
+          currentPage = 1;
+        }
+
+        displayTransactions();
+      }
+
+      function changeTransactionsPerPage() {
+        transactionsPerPage = parseInt(
+          document.getElementById("transactionsPerPage").value
+        );
+        currentPage = 1;
+        displayTransactions();
+      }
+
+      // Initial display
+      displayTransactions();
+    </script>
+  </body>
+</html>

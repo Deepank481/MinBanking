@@ -1,0 +1,218 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.sidebar {
+  width: 20%;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+h1,
+h2 {
+  margin-bottom: 20px;
+}
+
+.transaction-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.transaction-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+/* Your existing CSS styles remain unchanged */
+
+/* Additional styles for the money transfer form */
+#moneyTransferForm {
+  margin-top: 20px;
+}
+
+#moneyTransferForm label,
+#moneyTransferForm input,
+#moneyTransferForm textarea,
+#moneyTransferForm button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#moneyTransferForm button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+}
+/* Your existing CSS styles remain unchanged */
+
+/* Additional styles for the loan request form */
+#loanRequestForm {
+  margin-top: 20px;
+}
+
+#loanRequestForm label,
+#loanRequestForm input,
+#loanRequestForm textarea,
+#loanRequestForm button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#loanRequestForm button {
+  background-color: #ff9800;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+}
+/* Your existing CSS styles remain unchanged */
+
+/* Additional styles for the close account form */
+#closeAccountForm {
+  margin-top: 20px;
+}
+
+#closeAccountForm label,
+#closeAccountForm select,
+#closeAccountForm textarea,
+#closeAccountForm button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#closeAccountForm button {
+  background-color: #e53935;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+}
+/* Your existing CSS styles remain unchanged */
+
+/* Additional styles for the sort button */
+#sortButton {
+  background-color: #2196f3;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 10px;
+}
+
+#sortButton:hover {
+  background-color: #0b7dda;
+}
+/* Your existing CSS styles remain unchanged */
+
+/* Additional styles for the sort button and pagination */
+#sortButton {
+  background-color: #2196f3;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 10px;
+}
+
+#sortButton:hover {
+  background-color: #0b7dda;
+}
+
+#pagination {
+  margin-top: 10px;
+}
+
+#pagination button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  margin-right: 5px;
+}
+
+#pagination button:hover {
+  background-color: #45a049;
+}
+/* Your existing CSS styles remain unchanged */
+
+/* Additional styles for the change user form */
+#changeUserForm {
+  margin-top: 20px;
+}
+
+#changeUserForm label,
+#changeUserForm input,
+#changeUserForm button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#changeUserForm button {
+  background-color: #673ab7;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+}
+/* Your existing CSS styles remain unchanged */
+
+/* Additional styles for the transactions per page dropdown */
+#transactionsPerPage {
+  margin-bottom: 10px;
+}
+/* Your existing CSS styles */
+
+/* Additional styles for the footer */
+footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  /* Adjustments for smaller screens */
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar,
+  .main-content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  footer {
+    position: relative;
+  }
+}
