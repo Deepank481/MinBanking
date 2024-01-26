@@ -103,7 +103,7 @@
           <option value="50">50</option>
         </select>
 
-        <ul id="transactionList" class="transaction-list">
+        <ul id="transaction-list" class="transaction-list">
           <li class="transaction-item">Transaction 1 - $100.00</li>
           <li class="transaction-item">Transaction 2 - $50.00</li>
           <li class="transaction-item">Transaction 3 - $75.00</li>
@@ -125,53 +125,6 @@
       </p>
     </footer>
 
-    <script>
-      var transactionsPerPage = 10;
-      var currentPage = 1;
-
-      function sortTransactions() {
-        // Sorting logic here
-      }
-
-      function displayTransactions() {
-        var transactionList = document.getElementById("transactionList");
-        var transactions = transactionList.children;
-
-        for (var i = 0; i < transactions.length; i++) {
-          transactions[i].style.display = "none";
-        }
-
-        var startIndex = (currentPage - 1) * transactionsPerPage;
-        var endIndex = startIndex + transactionsPerPage;
-
-        for (var i = startIndex; i < endIndex; i++) {
-          if (transactions[i]) {
-            transactions[i].style.display = "block";
-          }
-        }
-
-        document.getElementById("currentPage").innerText = currentPage;
-      }
-
-      function changePage(offset) {
-        currentPage += offset;
-        if (currentPage < 1) {
-          currentPage = 1;
-        }
-
-        displayTransactions();
-      }
-
-      function changeTransactionsPerPage() {
-        transactionsPerPage = parseInt(
-          document.getElementById("transactionsPerPage").value
-        );
-        currentPage = 1;
-        displayTransactions();
-      }
-
-      // Initial display
-      displayTransactions();
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>
