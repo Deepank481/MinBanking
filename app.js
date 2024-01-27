@@ -32,7 +32,7 @@ const accounts = [account1, account2, account3];
 
 //Fetching elements
 const transactionList = document.getElementById("transaction-list");
-
+const accountSummary = document.getElementById("account-summary");
 function displayUserData(transactionHistory) {
   transactionList.innerHTML = "";
   transactionHistory.forEach(function (trans, i) {
@@ -55,6 +55,14 @@ const createUserName = function (acc) {
   });
 };
 
+const calcDisplaySummary = function (transactionHistory) {
+  account1.balance = transactionHistory.reduce((acc, curr) => acc + curr);
+  const html = `<p><strong>Account Number:</strong> ${account1.accountNo}</p>
+                <p><strong>Account Holder:</strong> ${account1.fullName}</p>
+                <p><strong>Account Balance:</strong> ${account1.balance} Rs</p>`;
+  accountSummary.insertAdjacentHTML("afterend", html);
+};
+
 displayUserData(account1.transactionHistory);
 createUserName(accounts);
-console.log(accounts);
+calcDisplaySummary(account1.transactionHistory);
