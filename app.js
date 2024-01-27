@@ -57,9 +57,22 @@ const createUserName = function (acc) {
 
 const calcDisplaySummary = function (transactionHistory) {
   account1.balance = transactionHistory.reduce((acc, curr) => acc + curr);
+  const totalDeposits = transactionHistory
+    .filter((val) => val > 0)
+    .reduce((acc, curr) => acc + curr);
+  const totalWithdrawls = transactionHistory
+    .filter((val) => val < 0)
+    .reduce((acc, curr) => acc + curr);
+  const interest = transactionHistory
+    .filter((val) => val > 0)
+    .map((val) => val * (account1.interestRate / 100))
+    .reduce((acc, curr) => acc + curr);
   const html = `<p><strong>Account Number:</strong> ${account1.accountNo}</p>
                 <p><strong>Account Holder:</strong> ${account1.fullName}</p>
-                <p><strong>Account Balance:</strong> ${account1.balance} Rs</p>`;
+                <p><strong>Account Balance:</strong> ${account1.balance} Rs</p>
+                <p><strong>Account Summary:</strong><br>Deposit:${totalDeposits}, <br> Withdrawl: ${Math.abs(
+    totalWithdrawls
+  )} <br> Interest Earned: ${interest}</p>`;
   accountSummary.insertAdjacentHTML("afterend", html);
 };
 
