@@ -13,7 +13,8 @@
 
     <div class="container">
       <div class="sidebar">
-        <h2 id="account-summary">Account Summary</h2>
+        <h2>Account Summary</h2>
+        <div id="account-summary"></div>
 
         <h2>Money Transfer</h2>
         <form id="moneyTransferForm">
@@ -73,18 +74,13 @@
 
         <h2>Change User</h2>
         <form id="changeUserForm">
-          <label for="newUserName">New User Name:</label>
-          <input type="text" id="newUserName" name="newUserName" required />
+          <label for="newUserName">User Name:</label>
+          <input type="text" id="user-id" name="newUserName" required />
 
-          <label for="newUserAccount">New User Account:</label>
-          <input
-            type="text"
-            id="newUserAccount"
-            name="newUserAccount"
-            required
-          />
+          <label for="newUserAccount">Pin:</label>
+          <input type="password" id="user-pin" name="newUserAccount" required />
 
-          <button type="submit">Change User</button>
+          <button id="submit-btn" type="submit">login</button>
         </form>
       </div>
 
@@ -103,9 +99,6 @@
         </select>
 
         <ul id="transaction-list" class="transaction-list">
-          <li class="transaction-item">Transaction 1 - $100.00</li>
-          <li class="transaction-item">Transaction 2 - $50.00</li>
-          <li class="transaction-item">Transaction 3 - $75.00</li>
           <!-- Add more transactions as needed -->
         </ul>
 
