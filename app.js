@@ -36,6 +36,7 @@ const account3 = {
 
 const accounts = [account1, account2, account3];
 let currAccountSelected = null;
+let isTransSorted = false;
 
 //Fetching elements
 const transactionList = document.getElementById("transaction-list");
@@ -46,15 +47,27 @@ const submitBtn = document.getElementById("submit-btn");
 const receiverAccountNo = document.getElementById("receiver-account-no");
 const amountTransferred = document.getElementById("amount-transferred");
 const transferMoneyBtn = document.getElementById("transfer-money-btn");
+const closeUserName = document.getElementById("close-user-name");
+const closeUserPin = document.getElementById("close-user-pin");
+const closeAccountBtn = document.getElementById("close-account-btn");
+const loanAmount = document.getElementById("loan-amount");
+const requestLoanBtn = document.getElementById("request-loan-btn");
+const sortTransBtn = document.getElementById("sort-trans-btn");
 
 //Registering event listener
 submitBtn.addEventListener("click", login);
 transferMoneyBtn.addEventListener("click", transferMoney);
+closeAccountBtn.addEventListener("click", closeUserAccount);
+requestLoanBtn.addEventListener("click", requestLoan);
+sortTransBtn.addEventListener("click", sortTransactions);
 
 //functions to perform the app logic
-function displayUserData(acc) {
+function displayUserData(acc, sort = false) {
   transactionList.innerHTML = "";
-  acc.transactionHistory.forEach(function (trans, i) {
+  const transactions = sort
+    ? acc.transactionHistory.slice().sort((a, b) => a - b)
+    : acc.transactionHistory;
+  transactions.forEach(function (trans, i) {
     const color = trans > 0 ? "green" : "red";
     const html = `<li class="transaction-item"><pre style="color: ${color};">Transaction ${
       i + 1
@@ -98,7 +111,12 @@ const calcDisplaySummary = function (acc) {
 
 function updateUI(acc) {
   calcDisplaySummary(acc);
-  displayUserData(acc);
+  displayUserData(acc, isTransSorted);
+}
+
+function resetUI() {
+  accountSummary.innerHTML = "";
+  transactionList.innerHTML = "";
 }
 
 //Function for event handeling
@@ -129,6 +147,42 @@ function transferMoney(e) {
     currAccountSelected.transactionHistory.push(-amount);
     updateUI(currAccountSelected);
   }
+}
+
+function closeUserAccount(e) {
+  e.preventDefault();
+  if (
+    closeUserName.value === currAccountSelected?.userName &&
+    closeUserPin.value === currAccountSelected?.pin.toString()
+  ) {
+    const index = accounts.findIndex(
+      (acc) =>
+        acc.pin === currAccountSelected.pin &&
+        acc.userName === currAccountSelected.userName
+    );
+    accounts.splice(index, 1);
+    resetUI();
+  }
+  closeUserName.value = "";
+  closeUserPin.value = "";
+}
+
+function requestLoan(e) {
+  e.preventDefault();
+  const loan = parseFloat(loanAmount.value);
+  if (
+    currAccountSelected.transactionHistory.some((trans) => trans >= loan / 10)
+  ) {
+    currAccountSelected.transactionHistory.push(loan);
+    updateUI(currAccountSelected);
+  }
+  loanAmount.value = "";
+}
+
+function sortTransactions(e) {
+  e.preventDefault();
+  isTransSorted = !isTransSorted;
+  displayUserData(currAccountSelected, isTransSorted);
 }
 
 //displayUserData(account1.transactionHistory);

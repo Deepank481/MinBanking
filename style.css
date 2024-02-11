@@ -118,7 +118,7 @@ h2 {
 /* Your existing CSS styles remain unchanged */
 
 /* Additional styles for the sort button */
-#sortButton {
+.sortButton {
   background-color: #2196f3;
   color: #fff;
   padding: 10px;

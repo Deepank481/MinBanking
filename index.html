@@ -38,38 +38,20 @@
         <h2>Loan Request</h2>
         <form id="loanRequestForm">
           <label for="loanAmount">Loan Amount:</label>
-          <input type="number" id="loanAmount" name="loanAmount" required />
+          <input type="number" id="loan-amount" name="loanAmount" required />
 
-          <label for="repaymentPeriod">Repayment Period (months):</label>
-          <input
-            type="number"
-            id="repaymentPeriod"
-            name="repaymentPeriod"
-            required
-          />
-
-          <label for="loanPurpose">Loan Purpose:</label>
-          <textarea id="loanPurpose" name="loanPurpose"></textarea>
-
-          <button type="submit">Request Loan</button>
+          <button type="submit" id="request-loan-btn">Request Loan</button>
         </form>
 
         <h2>Close Account</h2>
         <form id="closeAccountForm">
-          <label for="closureReason">Reason for Closure:</label>
-          <select id="closureReason" name="closureReason" required>
-            <option value="low_activity">Low Account Activity</option>
-            <option value="better_opportunity">Found Better Opportunity</option>
-            <option value="customer_service">
-              Unsatisfactory Customer Service
-            </option>
-            <!-- Add more closure reasons as needed -->
-          </select>
+          <label for="closureReason">User Name</label>
+          <input type="text" id="close-user-name" />
 
-          <label for="closureComments">Additional Comments:</label>
-          <textarea id="closureComments" name="closureComments"></textarea>
+          <label for="closureComments">Pin</label>
+          <input type="password" id="close-user-pin" />
 
-          <button type="submit">Close Account</button>
+          <button type="submit" id="close-account-btn">Close Account</button>
         </form>
 
         <h2>Change User</h2>
@@ -86,7 +68,7 @@
 
       <div class="main-content">
         <h2>Recent Transactions</h2>
-        <button id="sortButton" onclick="sortTransactions()">
+        <button class="sortButton" id="sort-trans-btn">
           Sort Transactions
         </button>
 
