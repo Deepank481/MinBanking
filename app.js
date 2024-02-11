@@ -6,9 +6,10 @@ const account1 = {
   accountNo: "0000012345",
   balance: 0,
   summary: [0, 0],
-  transactionHistory: [2500, 4000, -3000, 3200, -6000, 7000],
+  transactionHistory: [2500.0, 4000.0, -3000.0, 3200.0, -6000.0, 7000.0],
   interestRate: 1.5,
   pin: 1111,
+  isActive: true,
 };
 
 const account2 = {
@@ -16,9 +17,10 @@ const account2 = {
   accountNo: "0000054321",
   balance: 0,
   summary: [0, 0],
-  transactionHistory: [-2500, 4000, -3000, 3200, 6000, 7000],
+  transactionHistory: [-2500.0, 4000.0, -3000.0, 3200.0, 6000.0, 7000.0],
   interestRate: 2.5,
   pin: 2222,
+  isActive: true,
 };
 
 const account3 = {
@@ -26,12 +28,14 @@ const account3 = {
   accountNo: "0000067890",
   balance: 0,
   summary: [0, 0],
-  transactionHistory: [2500, 4000, 3000, -3200, -6000, 7000],
+  transactionHistory: [2500.0, 4000.0, 3000.0, -3200.0, -6000.0, 7000.0],
   interestRate: 3.5,
   pin: 3333,
+  isActive: true,
 };
 
 const accounts = [account1, account2, account3];
+let currAccountSelected = null;
 
 //Fetching elements
 const transactionList = document.getElementById("transaction-list");
@@ -39,9 +43,13 @@ const accountSummary = document.getElementById("account-summary");
 const userName = document.getElementById("user-id");
 const userPin = document.getElementById("user-pin");
 const submitBtn = document.getElementById("submit-btn");
+const receiverAccountNo = document.getElementById("receiver-account-no");
+const amountTransferred = document.getElementById("amount-transferred");
+const transferMoneyBtn = document.getElementById("transfer-money-btn");
 
 //Registering event listener
 submitBtn.addEventListener("click", login);
+transferMoneyBtn.addEventListener("click", transferMoney);
 
 //functions to perform the app logic
 function displayUserData(acc) {
@@ -88,14 +96,38 @@ const calcDisplaySummary = function (acc) {
   accountSummary.insertAdjacentHTML("beforeend", html);
 };
 
+function updateUI(acc) {
+  calcDisplaySummary(acc);
+  displayUserData(acc);
+}
+
+//Function for event handeling
 function login(e) {
   e.preventDefault();
-  let currAccountSelected = accounts.find(
-    (acc) => acc.userName === userName.value
-  );
+  currAccountSelected = accounts.find((acc) => acc.userName === userName.value);
   if (currAccountSelected?.pin.toString() === userPin.value) {
-    calcDisplaySummary(currAccountSelected);
-    displayUserData(currAccountSelected);
+    updateUI(currAccountSelected);
+  }
+}
+
+function transferMoney(e) {
+  e.preventDefault();
+  const receiverAccount = accounts.find(
+    (acc) => acc.accountNo === receiverAccountNo.value
+  );
+  const amount = parseFloat(amountTransferred.value);
+  amountTransferred.value = "";
+  receiverAccountNo.value = "";
+
+  if (
+    amount > 0 &&
+    receiverAccount &&
+    currAccountSelected.balance >= amount &&
+    currAccountSelected.accountNo !== receiverAccount.accountNo
+  ) {
+    receiverAccount.transactionHistory.push(amount);
+    currAccountSelected.transactionHistory.push(-amount);
+    updateUI(currAccountSelected);
   }
 }
 
